@@ -4,7 +4,7 @@ import ApiResponse from "../utils/ApiResponse.js";
 import ApiError from "../utils/ApiError.js";
 import { uploadOnCloudinary, deleteOnCloudinary } from "../utils/cloudinary.js";
 
-export const registerUser = asyncHandler(async (req, res) => {
+const registerUser = asyncHandler(async (req, res) => {
     const { name, username, password } = req.body;
 
     if (!name || !username || !password) {
@@ -36,7 +36,9 @@ export const registerUser = asyncHandler(async (req, res) => {
         profilePic: profilePic.url
     });
 
-    if (!user) {
+    const createdUser = await User.findById(user._id).select("-password -refreshToken");
+
+    if (!createdUser) {
         throw new ApiError(400, "User creation failed !!");
     }
 
@@ -51,3 +53,7 @@ export const registerUser = asyncHandler(async (req, res) => {
         );
 
 });
+
+export {
+    registerUser
+};
