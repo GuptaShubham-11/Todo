@@ -1,8 +1,20 @@
+import { Layout } from "./components";
+import { Home, Login, Register, NotFound } from "./pages";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <h1 className='text-3xl rounded p-2 bg-indigo-500 text-black'>Hello world</h1>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Layout>
+      </Router>
     </>
   )
 }
