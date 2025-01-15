@@ -13,8 +13,8 @@ export default {
           dark: "#2563EB",  // Dark mode variant
         },
         secondary: {
-          DEFAULT: "#6B7280", // Default gray for text
-          dark: "#D1D5DB",  // Light gray in dark mode
+          DEFAULT: "#374151", // A rich charcoal gray for maximum contrast
+          dark: "#F3F4F6",  // Off-white for dark mode
         },
       },
     },
