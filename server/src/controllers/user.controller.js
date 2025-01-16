@@ -72,7 +72,7 @@ const registerUser = asyncHandler(async (req, res) => {
             new ApiResponse(
                 201,
                 user,
-                "User created successfully !!"
+                "User registered successfully !!"
             )
         );
 
@@ -147,8 +147,129 @@ const logoutUser = asyncHandler(async (req, res) => {
         );
 });
 
+const getCurrentUser = asyncHandler(async (req, res) => {
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                req?.user,
+                "User found successfully."
+            )
+        );
+});
+
+const updateUserDetails = asyncHandler(async (req, res) => {
+    const { name } = req.body;
+
+    if (!name || name.trim() === "") {
+        throw new ApiError(400, "Please fill name field");
+    }
+
+    const user = await User.findByIdAndUpdate(
+        req.user?._id,
+        {
+            $set: {
+                name
+            }
+        },
+        {
+            new: true
+        }
+    ).select("-password");
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                user,
+                "User name updated successfully."
+            )
+        );
+});
+
+const updateUserProfilePic = asyncHandler(async (req, res) => {
+    const profilePicLocalPath = req.file?.path;
+    const oldProfilePicPath = req.user?.profilePic;
+
+    if (!profilePicLocalPath) {
+        throw new ApiError(400, "Profile picture is required");
+    }
+
+    const profilePic = await uploadOnCloudinary(profilePicLocalPath);
+
+    const user = await User.findByIdAndUpdate(
+        req.user?._id,
+        {
+            $set: {
+                profilePic: profilePic.url
+            }
+        },
+        {
+            new: true
+        }
+    ).select("-password");
+
+    await deleteOnCloudinary(oldProfilePicPath);
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                user,
+                "User profile picture updated successfully."
+            )
+        );
+});
+
+const refreshAccessToken = asyncHandler(async (req, res) => {
+    const IncomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;
+
+    if (!IncomingRefreshToken) {
+        throw new ApiError(400, "Refresh token is required");
+    }
+
+    const decodedToken = jwt.verify(IncomingRefreshToken, process.env.REFRESH_TOKEN_SECRET);
+
+    if (!decodedToken) {
+        throw new ApiError(400, "Invalid refresh token");
+    }
+
+    const user = await User.findById(decodedToken?._id);
+
+    if (!user) {
+        throw new ApiError(400, "Refresh token is invalid.");
+    }
+
+    if (IncomingRefreshToken !== user?.refreshToken) {
+        throw new ApiError(400, "Refresh token is use or expired.");
+    }
+
+    const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(user?._id);
+
+    return res
+        .status(200)
+        .cookie("accessToken", accessToken, options)
+        .cookie("refreshToken", refreshToken, options)
+        .json(
+            new ApiResponse(
+                200,
+                {
+                    accessToken, refreshToken
+                },
+                "Access token refreshed successfully."
+            )
+        );
+});
+
 export {
     registerUser,
     loginUser,
-    logoutUser
+    logoutUser,
+    getCurrentUser,
+    updateUserDetails,
+    updateUserProfilePic,
+    refreshAccessToken
 };
