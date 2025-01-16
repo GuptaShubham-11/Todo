@@ -109,7 +109,7 @@ const getTodoById = asyncHandler(async (req, res) => {
 });
 
 const getAllTodos = asyncHandler(async (req, res) => {
-    const todos = await Todo.findOne({ user: req.user?._id });
+    const todos = await Todo.find({ user: req.user?._id });
 
     return res
         .status(200)
