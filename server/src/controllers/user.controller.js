@@ -264,6 +264,43 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
         );
 });
 
+const changeCurrentPassword = asyncHandler(async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
+
+    if (!oldPassword || !newPassword) {
+        throw new ApiError(400, "Please fill all the fields");
+    }
+
+    if (oldPassword.trim() === "" || newPassword.trim() === "") {
+        throw new ApiError(400, "Please fill all the fields");
+    }
+
+    const user = await User.findById(req.user?._id);
+
+    if (!user) {
+        throw new ApiError(400, "User not found");
+    }
+
+    const isPasswordMatched = await user?.isPasswordMatched(oldPassword);
+
+    if (!isPasswordMatched) {
+        throw new ApiError(400, "Old password is incorrect");
+    }
+
+    user.password = newPassword;
+    await user.save({ validateBeforeSave: false });
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                {},
+                "Password changed successfully."
+            )
+        );
+});
+
 export {
     registerUser,
     loginUser,
@@ -271,5 +308,6 @@ export {
     getCurrentUser,
     updateUserDetails,
     updateUserProfilePic,
-    refreshAccessToken
+    refreshAccessToken,
+    changeCurrentPassword
 };
