@@ -19,6 +19,9 @@ app.use(cookieParser());
 import userRoutes from "./routes/user.routes.js";
 app.use("/api/v1/users", userRoutes);
 
+import todoRoutes from "./routes/todo.routes.js";
+app.use("/api/v1/todos", todoRoutes);
+
 // Global error handler for unhandled errors
 app.use((err, req, res, next) => {
     console.error(err.stack); // Log the error stack for debugging
