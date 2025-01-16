@@ -14,17 +14,23 @@ const router = Router();
 router.use(verifyJWT);
 
 router
-    .route("/todos")
-    .post(createTodo)
+    .route("/create-todo")
+    .post(createTodo);
+
+router
+    .route("/get-all-todos")
     .get(getAllTodos);
 
 router
-    .route("/todos/:id")
-    .put(updateTodo)
+    .route("/update-todo/:id")
+    .put(updateTodo);
+
+router
+    .route("/delete-todo/:id")
     .delete(deleteTodo);
 
 router
-    .route("/todos/:id")
+    .route("/get-todo/:id")
     .get(getTodoById);
 
 export default router;
