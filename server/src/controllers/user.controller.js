@@ -224,6 +224,24 @@ const updateUserProfilePic = asyncHandler(async (req, res) => {
         );
 });
 
+const deleteUser = asyncHandler(async (req, res) => {
+    const user = await User.findByIdAndDelete(req.user?._id);
+
+    if (!user) {
+        throw new ApiError(400, "User not found");
+    }
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                user,
+                "User deleted successfully."
+            )
+        );
+});
+
 const refreshAccessToken = asyncHandler(async (req, res) => {
     const IncomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;
 
@@ -301,6 +319,7 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
         );
 });
 
+
 export {
     registerUser,
     loginUser,
@@ -308,6 +327,7 @@ export {
     getCurrentUser,
     updateUserDetails,
     updateUserProfilePic,
+    deleteUser,
     refreshAccessToken,
     changeCurrentPassword
 };
