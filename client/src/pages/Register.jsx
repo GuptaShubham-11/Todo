@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, InputField, Alert, Loader } from "../components";
 import { registerUser } from "../api/authAPI.js";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -10,7 +11,9 @@ const Register = () => {
         profilePic: null,
     });
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState(null); // Simplified state
+    const [message, setMessage] = useState(null);
+    const navigate = useNavigate();
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -21,7 +24,11 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setMessage(null); // Clear previous message
+        if (!formData.name || !formData.username || !formData.password) {
+            setMessage({ message: "All fields are required!", code: 400 });
+            return;
+        }
+        setMessage(null);
         setLoading(true);
 
         try {
@@ -29,30 +36,31 @@ const Register = () => {
             data.append("name", formData.name);
             data.append("username", formData.username);
             data.append("password", formData.password);
-            if (formData.profilePic) {
-                data.append("profilePic", formData.profilePic);
-            }
+            if (formData.profilePic) data.append("profilePic", formData.profilePic);
 
             const response = await registerUser(data);
-
             setLoading(false);
-            setMessage({ message: response?.data?.message || response?.data, code: response?.status || response?.statusCode });
+            setMessage({
+                message: response?.data?.message || response?.data,
+                code: response?.status || response?.statusCode
+            });
 
+            if (response?.statusCode < 400) {
+                setTimeout(() => navigate("/login"), 5000);
+            }
         } catch (err) {
             setLoading(false);
             setMessage({
-                message: err.response.data || "Registration failed!",
-                code: err.response.statusCode || 400,
+                message: err.response?.data?.message || "Registration failed!",
+                code: err.response?.status || 500,
             });
         }
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-transparent">
-            <div className="mb-32 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-md">
-                <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
-                    Register
-                </h1>
+        <div className="min-h-screen flex items-center justify-center px-4 sm:px-0">
+            <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-md">
+                <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">Register</h1>
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <InputField
                         label="Name"
@@ -60,7 +68,6 @@ const Register = () => {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        placeholder="Enter your full name"
                         required
                     />
                     <InputField
@@ -69,7 +76,6 @@ const Register = () => {
                         name="username"
                         value={formData.username}
                         onChange={handleChange}
-                        placeholder="Choose a username"
                         required
                     />
                     <InputField
@@ -78,7 +84,6 @@ const Register = () => {
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
-                        placeholder="Create a password"
                         required
                     />
                     <InputField
@@ -87,40 +92,26 @@ const Register = () => {
                         name="profilePic"
                         onChange={handleFileChange}
                         accept="image/*"
+                        required
                     />
-                    {/* Show loader or button based on loading state */}
                     {loading ? (
                         <div className="flex justify-center mt-4">
-                            <Loader /> {/* Simple visible loader */}
+                            <Loader />
                         </div>
                     ) : (
-                        <Button
-                            text="Register"
-                            type="submit"
-                            className="mt-4"
-                        />
+                        <Button text="Register" type="submit" className="mt-4" />
                     )}
                 </form>
-
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-4 text-center">
                     Already have an account?{" "}
-                    <a
-                        href="/login"
-                        className="text-primary dark:text-primary-dark hover:underline"
-                    >
-                        Login here
-                    </a>
+                    <Link to="/login" className="text-primary dark:text-primary-dark hover:underline">Login here</Link>
                 </p>
             </div>
-
-            {/* Alert Component */}
-            {message && (
-                <Alert
-                    message={message.message}
-                    code={message.code}
-                    onClose={() => setMessage(null)}
-                />
-            )}
+            {message && <Alert
+                message={message.message}
+                type={message.code < 400 ? "success" : "error"}
+                onClose={() => setMessage(null)}
+            />}
         </div>
     );
 };
