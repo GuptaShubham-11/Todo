@@ -6,6 +6,7 @@ import InputField from "./InputField.jsx";
 import Button from "./Button.jsx";
 import Alert from "./Alert.jsx";
 import Loader from "./Loader.jsx";
+import Slider from "./Slider.jsx";
 
 export {
     Layout,
@@ -15,5 +16,6 @@ export {
     InputField,
     Button,
     Alert,
-    Loader
+    Loader,
+    Slider
 };
