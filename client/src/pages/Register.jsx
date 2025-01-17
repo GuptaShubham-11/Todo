@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, InputField, Alert, Loader } from "../components";
-import { registerUser } from "../api/authAPI.js";
+import { authAPI } from "../api/authAPI.js";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -19,7 +19,12 @@ const Register = () => {
     };
 
     const handleFileChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+        const file = e.target.files[0];
+        if (file && file.size > 2 * 1024 * 1024) { // 2MB limit
+            setMessage({ message: "File size should not exceed 2MB", code: 400 });
+            return;
+        }
+        setFormData({ ...formData, [e.target.name]: file });
     };
 
     const handleSubmit = async (e) => {
@@ -38,15 +43,15 @@ const Register = () => {
             data.append("password", formData.password);
             if (formData.profilePic) data.append("profilePic", formData.profilePic);
 
-            const response = await registerUser(data);
+            const response = await authAPI.registerUser(data);
             setLoading(false);
             setMessage({
                 message: response?.data?.message || response?.data,
-                code: response?.status || response?.statusCode
+                code: response?.status || response?.statusCode,
             });
 
             if (response?.statusCode < 400) {
-                setTimeout(() => navigate("/login"), 5000);
+                navigate("/login", { replace: true });
             }
         } catch (err) {
             setLoading(false);
@@ -104,14 +109,18 @@ const Register = () => {
                 </form>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-4 text-center">
                     Already have an account?{" "}
-                    <Link to="/login" className="text-primary dark:text-primary-dark hover:underline">Login here</Link>
+                    <Link to="/login" className="text-primary dark:text-primary-dark hover:underline">
+                        Login here
+                    </Link>
                 </p>
             </div>
-            {message && <Alert
-                message={message.message}
-                type={message.code < 400 ? "success" : "error"}
-                onClose={() => setMessage(null)}
-            />}
+            {message && (
+                <Alert
+                    message={message.message}
+                    type={message.code < 400 ? "success" : "error"}
+                    onClose={() => setMessage(null)}
+                />
+            )}
         </div>
     );
 };

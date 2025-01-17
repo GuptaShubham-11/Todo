@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { InputField, Button, Loader, Alert } from "../components";
-import { loginUser } from "../api/authAPI";
+import { authAPI } from "../api/authAPI.js";
 
 const Login = () => {
 
@@ -28,7 +28,7 @@ const Login = () => {
                 password: formData.password,
             };
 
-            const response = await loginUser(data);
+            const response = await authAPI.loginUser(data);
 
             setLoading(false);
             setMessage({ message: response?.data?.message || response?.data, code: response?.status || response?.statusCode });
