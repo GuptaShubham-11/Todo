@@ -98,7 +98,7 @@ const Login = () => {
                         <Button
                             text="Login"
                             type="submit"
-                            className="mt-4"
+                            className="mt-4 w-full"
                         />
                     )}
                 </form>
