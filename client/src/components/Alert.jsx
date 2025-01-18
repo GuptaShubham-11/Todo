@@ -12,7 +12,7 @@ const Alert = ({ message, code, onClose }) => {
             className={`fixed top-4 right-4 z-50 flex items-center p-4 rounded-lg shadow-lg border-l-4 ${bgColor}`}
             role="alert"
         >
-            <span className="flex-1">{type === "success" ? message + " Redirecting to dashboard..." : message}</span>
+            <span className="flex-1">{message}</span>
             <button
                 className="ml-4 text-lg font-bold text-gray-500 hover:text-gray-800"
                 onClick={onClose}
