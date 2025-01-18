@@ -9,6 +9,8 @@ import Loader from "./Loader.jsx";
 import Slider from "./Slider.jsx";
 import Sidebar from "./Sidebar.jsx";
 import ProfileCard from "./ProfileCard.jsx";
+import AddTodo from "./AddTodo.jsx";
+import TodoItem from "./TodoItem.jsx";
 
 export {
     Layout,
@@ -21,5 +23,7 @@ export {
     Loader,
     Slider,
     Sidebar,
-    ProfileCard
+    ProfileCard,
+    AddTodo,
+    TodoItem
 };
