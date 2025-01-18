@@ -7,6 +7,8 @@ import Button from "./Button.jsx";
 import Alert from "./Alert.jsx";
 import Loader from "./Loader.jsx";
 import Slider from "./Slider.jsx";
+import Sidebar from "./Sidebar.jsx";
+import ProfileCard from "./ProfileCard.jsx";
 
 export {
     Layout,
@@ -17,5 +19,7 @@ export {
     Button,
     Alert,
     Loader,
-    Slider
+    Slider,
+    Sidebar,
+    ProfileCard
 };

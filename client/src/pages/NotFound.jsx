@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const NotFound = () => {
     return (
         <div className="mt-24 flex flex-col items-center justify-center bg-transparent text-center">
@@ -10,12 +12,12 @@ const NotFound = () => {
             <p className="text-lg mb-6 max-w-md text-gray-600 dark:text-gray-400">
                 Sorry, the page you're looking for doesn't exist. It may have been moved or deleted.
             </p>
-            <a
-                href="/"
+            <Link
+                to="/dashboard"
                 className="px-6 py-2 bg-primary text-white rounded-lg shadow hover:bg-opacity-90 dark:bg-primary-dark"
             >
-                Back to Home
-            </a>
+                Back to dashboard
+            </Link>
         </div>
     );
 };

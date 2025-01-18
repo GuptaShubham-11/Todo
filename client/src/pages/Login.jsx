@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { InputField, Button, Loader, Alert } from "../components";
 import { authAPI } from "../api/authAPI.js";
+import { useDispatch } from "react-redux";
+import { login } from "../features/authSlice.js";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
 
@@ -11,6 +14,9 @@ const Login = () => {
 
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState(null);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         SetFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,8 +36,23 @@ const Login = () => {
 
             const response = await authAPI.loginUser(data);
 
+            console.log(response);
+
             setLoading(false);
-            setMessage({ message: response?.data?.message || response?.data, code: response?.status || response?.statusCode });
+            setMessage({ message: response?.data?.data || response?.message, code: response?.data?.statusCode || response?.status });
+
+            // If login is successful
+            if (response?.data?.statusCode < 400 && response?.data?.message?.user) {
+                // Dispatching user data, accessToken, refreshToken, and isAuthenticated to Redux
+                dispatch(login({
+                    user: response.data.message.user,
+                    accessToken: response.data.message.accessToken,
+                    refreshToken: response.data.message.refreshToken,
+                }));
+                setTimeout(() => {
+                    navigate("/dashboard");
+                }, 2000);
+            }
 
         } catch (err) {
             setLoading(false);
@@ -41,6 +62,7 @@ const Login = () => {
             });
         }
     }
+
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-transparent">
@@ -83,12 +105,12 @@ const Login = () => {
 
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-4 text-center">
                     Create an account?{" "}
-                    <a
-                        href="/register"
+                    <Link
+                        to="/register"
                         className="text-primary dark:text-primary-dark hover:underline"
                     >
                         Register here
-                    </a>
+                    </Link>
                 </p>
             </div>
 
@@ -100,6 +122,7 @@ const Login = () => {
                     onClose={() => setMessage(null)}
                 />
             )}
+
         </div>
     );
 };

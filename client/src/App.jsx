@@ -1,11 +1,12 @@
 import { Layout } from "./components";
-import { Home, Login, Register, NotFound } from "./pages";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Home, Login, Register, Dashboard, NotFound, Profile, Todos } from "./pages";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 function App() {
   const theme = useSelector((state) => state.theme.theme);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   useEffect(() => {
     // Apply the theme class to the <html> element
@@ -19,9 +20,35 @@ function App() {
       <Routes>
         {/* Layout wraps all routes */}
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} /> {/* Default route */}
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+          {/* Home page accessible to unauthenticated users */}
+          <Route path="/" element={!isAuthenticated ? <Home /> : <Navigate to="/dashboard" />} />
+
+          {/* Login and Register routes for unauthenticated users */}
+          <Route
+            path="login"
+            element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login />}
+          />
+          <Route
+            path="register"
+            element={isAuthenticated ? <Navigate to="/dashboard" /> : <Register />}
+          />
+
+          {/* Dashboard page accessible only to authenticated users */}
+          <Route
+            path="dashboard"
+            element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />}
+          />
+
+          <Route
+            path="profile"
+            element={isAuthenticated ? <Profile /> : <Navigate to="/login" />}
+          />
+
+          <Route
+            path="tasks"
+            element={isAuthenticated ? <Todos /> : <Navigate to="/login" />}
+          />
+
           <Route path="*" element={<NotFound />} /> {/* Fallback for undefined routes */}
         </Route>
       </Routes>
