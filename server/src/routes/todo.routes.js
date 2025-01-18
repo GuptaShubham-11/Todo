@@ -4,7 +4,8 @@ import {
     updateTodo,
     deleteTodo,
     getTodoById,
-    getAllTodos
+    getAllTodos,
+    isCompleteTodo
 } from "../controllers/todo.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
@@ -23,7 +24,11 @@ router
 
 router
     .route("/update-todo/:id")
-    .put(updateTodo);
+    .put(updateTodo)
+
+router
+    .route("/toggle-todo/:id")
+    .put(isCompleteTodo);
 
 router
     .route("/delete-todo/:id")

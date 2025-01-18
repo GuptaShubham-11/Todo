@@ -29,7 +29,7 @@ const createTodo = asyncHandler(async (req, res) => {
 
 const updateTodo = asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const { text, isCompleted } = req.body;
+    const { text } = req.body;
 
     if (!text || text.trim() === "") {
         throw new ApiError(400, "Please fill all the fields");
@@ -42,9 +42,8 @@ const updateTodo = asyncHandler(async (req, res) => {
         },
         {
             $set: {
-                text: text.trim(),
-                isCompleted: isCompleted || false,
-            }
+                ...(text?.trim() && { text: text.trim() }), // Only include `text` if valid
+            },
         },
         {
             new: true
@@ -62,6 +61,40 @@ const updateTodo = asyncHandler(async (req, res) => {
                 200,
                 todo,
                 "Todo updated successfully."
+            )
+        );
+});
+
+const isCompleteTodo = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { isCompleted } = req.body;
+
+    const todo = await Todo.findOneAndUpdate(
+        {
+            _id: id,
+            user: req.user?._id
+        },
+        {
+            $set: {
+                isCompleted
+            }
+        },
+        {
+            new: true
+        }
+    );
+
+    if (!todo) {
+        throw new ApiError(404, "Todo not found or unauthorized.");
+    }
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                todo,
+                "Todo toggled successfully."
             )
         );
 });
@@ -127,5 +160,6 @@ export {
     updateTodo,
     deleteTodo,
     getTodoById,
-    getAllTodos
+    getAllTodos,
+    isCompleteTodo
 };
