@@ -1,8 +1,9 @@
 import { Layout } from "./components";
-import { Home, Login, Register, Dashboard, NotFound, Profile, Todos } from "./pages";
+import { Home, Login, Register, Dashboard, NotFound, Todos } from "./pages";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import FocusMode from "./pages/FocusMode.jsx";
 
 function App() {
   const theme = useSelector((state) => state.theme.theme);
@@ -40,8 +41,8 @@ function App() {
           />
 
           <Route
-            path="profile"
-            element={isAuthenticated ? <Profile /> : <Navigate to="/login" />}
+            path="focus-mode"
+            element={isAuthenticated ? <FocusMode /> : <Navigate to="/" />}
           />
 
           <Route
