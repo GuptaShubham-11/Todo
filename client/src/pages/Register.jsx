@@ -104,7 +104,7 @@ const Register = () => {
                             <Loader />
                         </div>
                     ) : (
-                        <Button text="Register" type="submit" className="mt-4" />
+                        <Button text="Register" type="submit" className="mt-4 w-full" />
                     )}
                 </form>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-4 text-center">
