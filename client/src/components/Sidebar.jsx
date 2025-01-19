@@ -5,10 +5,11 @@ import {
     AiOutlineClose,
     AiOutlineQuestionCircle,
     AiOutlineCheckSquare,
-    AiFillCodeSandboxSquare,
     AiOutlineGithub,
-    AiOutlineLinkedin,
+    AiOutlineLinkedin
 } from "react-icons/ai";
+import { FaBullseye } from "react-icons/fa";
+import { SiLeetcode } from "react-icons/si";
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
@@ -51,20 +52,21 @@ export default function Sidebar() {
     const menuItems = [
         { icon: <AiOutlineHome />, label: "Dashboard", path: "/dashboard" },
         { icon: <AiOutlineCheckSquare />, label: "Tasks", path: "/tasks" },
+        { icon: <FaBullseye />, label: "Focus Mode", path: "/focus-mode" },
         {
             icon: <AiOutlineGithub />,
             label: "GitHub",
-            path: "https://github.com/your-github-profile",
+            path: "https://github.com/GuptaShubham-11/Todo",
         },
         {
             icon: <AiOutlineLinkedin />,
             label: "LinkedIn",
-            path: "https://linkedin.com/in/your-linkedin-profile",
+            path: "https://www.linkedin.com/in/guptashubham11/",
         },
         {
-            icon: <AiFillCodeSandboxSquare />,
+            icon: <SiLeetcode />,
             label: "LeetCode",
-            path: "https://leetcode.com/your-leetcode-profile",
+            path: "https://leetcode.com/u/GuptaShubham-11/",
         },
         {
             icon: <AiOutlineQuestionCircle />,
