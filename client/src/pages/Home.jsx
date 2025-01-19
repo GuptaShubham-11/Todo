@@ -1,5 +1,6 @@
 import React from "react";
 import { Slider } from "../components";
+import { Link } from "react-router-dom";
 
 const Home = () => {
 
@@ -51,20 +52,20 @@ const Home = () => {
                     Manage your tasks effectively and stay productive with our user-friendly Todo app.
                 </p>
                 <div className="flex justify-center space-x-4">
-                    <a
-                        href="/login"
+                    <Link
+                        to="/login"
                         className="px-6 py-2 rounded-lg bg-primary text-white hover:bg-opacity-90 shadow-md dark:bg-primary-dark"
                         aria-label="Go to Login Page"
                     >
                         Login
-                    </a>
-                    <a
-                        href="/register"
+                    </Link>
+                    <Link
+                        to="/register"
                         className="px-6 py-2 rounded-lg bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white shadow-md dark:border-primary-dark dark:text-primary-dark dark:hover:bg-primary-dark dark:hover:text-white"
                         aria-label="Go to Register Page"
                     >
                         Register
-                    </a>
+                    </Link>
                 </div>
             </div>
             {/* Add Slider Below */}

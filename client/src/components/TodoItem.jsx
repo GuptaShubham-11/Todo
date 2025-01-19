@@ -20,21 +20,19 @@ const TodoItem = ({ todo, handleUpdateTodo, handleDeleteTodo, handleToggleTodo }
 
     return (
         <div
-            className={`flex items-center justify-between p-4 rounded-lg shadow-lg transition-transform transform ${todo.isCompleted
+            className={`flex flex-col sm:flex-row items-center justify-between p-4 rounded-lg shadow-lg transition-transform transform ${todo.isCompleted
                 ? "bg-emerald-100 dark:bg-emerald-300 scale-105"
                 : "bg-gray-100 dark:bg-gray-800"
                 }`}
-
         >
             {/* Checkbox and Todo Text */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 w-full sm:w-auto">
                 <button
                     onClick={() => handleToggleTodo(todo._id, !todo.isCompleted)}
                     className="text-2xl text-green-500 dark:text-green-600 hover:scale-110 transition-transform"
                     aria-label={todo.isCompleted ? "Mark as incomplete" : "Mark as complete"}
                 >
                     {todo.isCompleted ? <MdDone /> : <MdOutlineCircle />}
-
                 </button>
 
                 {isEditing ? (
@@ -55,7 +53,7 @@ const TodoItem = ({ todo, handleUpdateTodo, handleDeleteTodo, handleToggleTodo }
             </div>
 
             {/* Edit, Save/Cancel, and Delete Icons */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 mt-2 sm:mt-0">
                 {isEditing ? (
                     <>
                         <button

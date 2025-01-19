@@ -9,9 +9,6 @@ const Todos = () => {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState(null);
 
-    console.log("TOdods", todos);
-
-
     useEffect(() => {
         const fetchTodos = async () => {
             setLoading(true);

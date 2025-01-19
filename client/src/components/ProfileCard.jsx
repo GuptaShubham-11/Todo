@@ -7,7 +7,7 @@ const ProfileCard = ({ user, loading, handleLogout }) => {
     const [editName, setEditName] = useState(false);
     const [newName, setNewName] = useState(user?.name || "Guest");
     const [message, setMessage] = useState(null);
-    const [loadingState, setLoadingState] = useState(false);  // Loader for saving name
+    const [loadingState, setLoadingState] = useState(false); // Loader for saving name
 
     // Toggle the edit name state
     const handleEditName = () => setEditName((prev) => !prev);
@@ -16,7 +16,7 @@ const ProfileCard = ({ user, loading, handleLogout }) => {
     const handleNameChange = (e) => setNewName(e.target.value);
 
     const handleSaveName = async () => {
-        setLoadingState(true);  // Show loader
+        setLoadingState(true); // Show loader
         try {
             // Assuming the API expects an object { name: newName }
             const response = await authAPI.updateUserDetails({ name: newName });
@@ -39,7 +39,7 @@ const ProfileCard = ({ user, loading, handleLogout }) => {
                 code: 500,
             });
         } finally {
-            setLoadingState(false);  // Hide loader
+            setLoadingState(false); // Hide loader
             setTimeout(() => {
                 setMessage(null);
             }, 2000);
@@ -47,8 +47,14 @@ const ProfileCard = ({ user, loading, handleLogout }) => {
     };
 
     return (
-        <div className="bg-white dark:bg-gray-800 w-72 shadow-lg rounded-lg p-6 mb-6 transform hover:scale-105 transition-transform duration-300">
-            {message && <Alert message={message.text} code={message.code} onClose={() => setMessage(null)} />}
+        <div className="relative w-full bg-gray-100 dark:from-gray-800 dark:to-gray-900 shadow-2xl rounded-xl p-6">
+            {message && (
+                <Alert
+                    message={message.text}
+                    code={message.code}
+                    onClose={() => setMessage(null)}
+                />
+            )}
             <div className="flex flex-col items-center mb-6">
                 {/* Profile Image */}
                 <div className="relative w-24 h-24">
@@ -85,16 +91,18 @@ const ProfileCard = ({ user, loading, handleLogout }) => {
 
                         {/* Edit/Save Icon */}
                         <button
-                            className="text-blue-500"
+                            className="text-blue-500 ml-2"
                             onClick={editName ? handleSaveName : handleEditName}
-                            disabled={loadingState}  // Disable the button when loading
+                            disabled={loadingState} // Disable the button when loading
                         >
                             {loadingState ? <Loader /> : editName ? <FaSave /> : <FaEdit />}
                         </button>
                     </div>
 
                     {/* Username */}
-                    <p className="text-sm text-gray-600 dark:text-gray-400">@{user?.username || "Unknown"}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                        @{user?.username || "Unknown"}
+                    </p>
                 </div>
             </div>
 

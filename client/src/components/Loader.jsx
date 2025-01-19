@@ -1,9 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const Loader = () => {
     return (
-        <div className="flex justify-center items-center">
-            <div className="border-t-4 border-green-400 border-solid w-12 h-12 rounded-full animate-spin"></div>
+        <div className="flex justify-center items-center w-full h-full">
+            <div className="w-12 h-12 border-t-4 border-green-400 border-solid rounded-full animate-spin sm:w-12 sm:h-12">
+                {/* Loader Circle */}
+            </div>
         </div>
     );
 };

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../features/authSlice.js"; // Logout action from authSlice
 import { Sidebar, Alert, ProfileCard } from "../components"; // Import necessary components
+import TaskProgress from "../components/TaskProgress.jsx";
+import RecentActivities from "../components/RecentActivities.jsx"; // Import the new RecentActivities component
 
 const Dashboard = () => {
     const dispatch = useDispatch();
@@ -28,43 +30,24 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="flex min-h-screen bg-transparent dark:bg-gray-900">
+        <div className="flex min-h-screen">
             {/* Sidebar */}
             <Sidebar />
 
             {/* Main Content */}
             <div className="flex-1 p-6 transition-transform">
-                {/* Profile Section */}
-                <div className="flex flex-col lg:flex-row items-start lg:items-center lg:justify-between mb-8">
+                {/* Profile Section and Task Progress */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-8">
+                    {/* ProfileCard */}
                     <ProfileCard user={user} loading={loading} handleLogout={handleLogout} />
-
+                    {/* TaskProgress */}
+                    <TaskProgress completedTasks={6} totalTasks={13} />
                 </div>
 
                 {/* Dashboard Content */}
-                <div className="bg-gray-200 dark:bg-gray-800 shadow-lg rounded-xl p-6 mb-6">
-                    <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
-                        Recent Activities
-                    </h2>
-                    <ul className="space-y-3">
-                        <li className="flex items-center space-x-3">
-                            <span className="w-3 h-3 bg-green-500 rounded-full"></span>
-                            <span className="text-gray-700 dark:text-gray-300">
-                                ✅ Completed Task: Build Authentication API
-                            </span>
-                        </li>
-                        <li className="flex items-center space-x-3">
-                            <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
-                            <span className="text-gray-700 dark:text-gray-300">
-                                ✨ Added new feature: User Dashboard
-                            </span>
-                        </li>
-                        <li className="flex items-center space-x-3">
-                            <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
-                            <span className="text-gray-700 dark:text-gray-300">
-                                🐞 Fixed bugs in the app's UI
-                            </span>
-                        </li>
-                    </ul>
+                <div className="mt-8 bg-gray-100 dark:bg-gray-800 shadow-xl rounded-xl p-6">
+                    {/* Recent Activities Section */}
+                    <RecentActivities />
                 </div>
 
                 {/* Display Alert Message */}

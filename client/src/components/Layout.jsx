@@ -1,4 +1,4 @@
-import { Header, Footer, Sidebar } from './index.js';
+import { Header, Footer } from './index.js';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
@@ -20,10 +20,10 @@ const Layout = () => {
             <Header />
 
             {/* Main Section */}
-            <div className="flex flex-grow">
+            <div className="flex flex-grow flex-col lg:flex-row">
 
-                {/* Main Content */}
-                <main className="flex-grow p-6">
+                {/* Sidebar or Main Content */}
+                <main className="flex-grow p-4 sm:p-6 lg:p-8">
                     <Outlet />
                 </main>
             </div>
