@@ -22,6 +22,9 @@ app.use("/api/v1/users", userRoutes);
 import todoRoutes from "./routes/todo.routes.js";
 app.use("/api/v1/todos", todoRoutes);
 
+import dashboardRoutes from "./routes/dashboard.routes.js";
+app.use("/api/v1/dashboard", dashboardRoutes);
+
 // Global error handler for unhandled errors
 app.use((err, req, res, next) => {
     console.error(err.stack); // Log the error stack for debugging
