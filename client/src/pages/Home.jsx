@@ -3,45 +3,6 @@ import { Slider } from "../components";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-
-    const sliderItems = [
-        <div className="p-6 bg-gradient-to-r from-indigo-100 via-white to-indigo-50 dark:from-gray-700 dark:to-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <h3 className="text-2xl font-bold text-primary dark:text-primary-dark mb-3">
-                Feature 1
-            </h3>
-            <p className="text-base text-secondary dark:text-secondary-dark">
-                Organize your tasks effortlessly.
-            </p>
-        </div>,
-
-        <div className="p-6 bg-gradient-to-r from-teal-100 via-white to-teal-50 dark:from-gray-700 dark:to-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <h3 className="text-2xl font-bold text-primary dark:text-primary-dark mb-3">
-                Feature 2
-            </h3>
-            <p className="text-base text-secondary dark:text-secondary-dark">
-                Stay productive with reminders.
-            </p>
-        </div>,
-
-        <div className="p-6 bg-gradient-to-r from-pink-100 via-white to-pink-50 dark:from-gray-700 dark:to-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <h3 className="text-2xl font-bold text-primary dark:text-primary-dark mb-3">
-                Feature 3
-            </h3>
-            <p className="text-base text-secondary dark:text-secondary-dark">
-                Organize your tasks effortlessly.
-            </p>
-        </div>,
-
-        <div className="p-6 bg-gradient-to-r from-yellow-100 via-white to-yellow-50 dark:from-gray-700 dark:to-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <h3 className="text-2xl font-bold text-primary dark:text-primary-dark mb-3">
-                Feature 4
-            </h3>
-            <p className="text-base text-secondary dark:text-secondary-dark">
-                Stay productive with reminders.
-            </p>
-        </div>,
-    ];
-
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-transparent">
             <div className="mb-12 text-center space-y-6">
@@ -70,7 +31,7 @@ const Home = () => {
             </div>
             {/* Add Slider Below */}
             <div className="w-full max-w-lg">
-                <Slider items={sliderItems} title="Why Choose Us?" />
+                <Slider />
             </div>
         </div>
     );
