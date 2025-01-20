@@ -5,3 +5,55 @@
 :root {
   background-color: #242424;
 }
+
+html,
+body {
+  @apply overflow-y-auto;
+}
+
+/* Apply custom scrollbar styles globally */
+::-webkit-scrollbar {
+  width: 12px;
+  /* Width for vertical scrollbar */
+  height: 12px;
+  /* Height for horizontal scrollbar */
+}
+
+/* Track (background) */
+::-webkit-scrollbar-track {
+  background: linear-gradient(45deg, #e0e0e0, #f0f0f0);
+  /* Light gradient */
+  border-radius: 10px;
+  /* Rounded corners */
+}
+
+/* Thumb (scroll handle) */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #4A90E2, #9013FE);
+  /* Unique gradient */
+  border-radius: 10px;
+  /* Rounded corners */
+  border: 2px solid #f0f0f0;
+  /* Space between thumb and track */
+}
+
+/* Thumb hover */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #3A70C2, #8013DE);
+  /* Darker gradient on hover */
+}
+
+/* Edge (buttons if present) */
+::-webkit-scrollbar-corner {
+  background: transparent;
+  /* Matches the background */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    /* Narrower on smaller screens */
+    height: 8px;
+  }
+}
