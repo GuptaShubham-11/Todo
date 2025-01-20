@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Sidebar } from "../components";
+import { Sidebar, Alert } from "../components";
 
 const FocusMode = () => {
     const [time, setTime] = useState(0); // Total elapsed time in seconds
@@ -112,7 +112,6 @@ const FocusMode = () => {
                         <button
                             className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded shadow focus:outline-none"
                             onClick={toggleFocusMode}
-                            disabled={time === 0} // Disable if timer hasn't started
                         >
                             {isFocusMode ? "Exit Focus Mode" : "Focus Mode"}
                         </button>

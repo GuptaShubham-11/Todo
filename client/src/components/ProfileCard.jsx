@@ -47,7 +47,7 @@ const ProfileCard = ({ user, loading, handleLogout }) => {
     };
 
     return (
-        <div className="relative w-full bg-gray-100 dark:from-gray-800 dark:to-gray-900 shadow-2xl rounded-xl p-6">
+        <div className="relative w-full bg-gray-100 dark:bg-gray-800 shadow-2xl rounded-xl p-6">
             {message && (
                 <Alert
                     message={message.text}
@@ -108,7 +108,7 @@ const ProfileCard = ({ user, loading, handleLogout }) => {
 
             {/* Logout Button */}
             <button
-                className="w-full py-2 bg-red-500 text-white font-medium rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 transition duration-300"
+                className="w-full py-2 bg-red-500 dark:bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 transition duration-300"
                 onClick={handleLogout}
                 disabled={loading}
             >

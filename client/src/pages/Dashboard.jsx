@@ -45,7 +45,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Dashboard Content */}
-                <div className="mt-8 bg-gray-100 dark:bg-gray-800 shadow-xl rounded-xl p-6">
+                <div className="mt-8 rounded-xl p-6">
                     {/* Recent Activities Section */}
                     <RecentActivities />
                 </div>
