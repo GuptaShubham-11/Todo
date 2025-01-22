@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "task-management-app",
+    "name": "todo",
     "builds": [
         {
             "src": "client/package.json",
