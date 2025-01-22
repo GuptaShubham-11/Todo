@@ -31,7 +31,6 @@ const getAllTodos = async () => {
     try {
         const response = await apiClient.get("/get-all-todos");
         if (response.data && Array.isArray(response.data.message)) {
-            console.log("getAllTodos: ", response.data.message);
             return handleResponse(response); // Extract the array from the response
         }
         return []; // Return an empty array if no todos are found
