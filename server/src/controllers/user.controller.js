@@ -46,19 +46,19 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Username already exists");
     }
 
-    const profilePicLocalPath = req.file?.path;
+    let profilePic;
 
-    if (!profilePicLocalPath) {
-        throw new ApiError(400, "Profile picture is required");
+    if (req.file && req.file.path) {
+        const profilePicLocalPath = req.file.path;
+        profilePic = await uploadOnCloudinary(profilePicLocalPath);
     }
 
-    const profilePic = await uploadOnCloudinary(profilePicLocalPath);
 
     const user = await User.create({
         name,
         username: username.toLowerCase(),
         password,
-        profilePic: profilePic.url
+        profilePic: profilePic?.url || ""
     });
 
     const createdUser = await User.findById(user._id).select("-password -refreshToken");
@@ -193,6 +193,11 @@ const updateUserDetails = asyncHandler(async (req, res) => {
 const updateUserProfilePic = asyncHandler(async (req, res) => {
     const profilePicLocalPath = req.file?.path;
     const oldProfilePicPath = req.user?.profilePic;
+
+    console.log(profilePicLocalPath);
+    console.log(oldProfilePicPath);
+
+
 
     if (!profilePicLocalPath) {
         throw new ApiError(400, "Profile picture is required");
