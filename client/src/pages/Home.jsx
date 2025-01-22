@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Slider } from "../components";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+    const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+
+    // Track mouse movement
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            setCursorPosition({ x: e.clientX, y: e.clientY });
+        };
+
+        document.addEventListener("mousemove", handleMouseMove);
+        return () => document.removeEventListener("mousemove", handleMouseMove);
+    }, []);
+
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-transparent">
-            <div className="mb-12 text-center space-y-6">
+        <div className="relative min-h-screen flex flex-col items-center justify-center bg-transparent overflow-hidden">
+            {/* Moving pointer effect */}
+            <div
+                className="absolute w-40 h-40 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-50 pointer-events-none transition-transform duration-200 ease-out"
+                style={{
+                    transform: `translate(${cursorPosition.x - 90}px, ${cursorPosition.y - 90}px)`,
+                }}
+            ></div>
+
+            <div className="mb-12 text-center space-y-6 relative z-10">
                 <h1 className="text-4xl font-extrabold text-primary dark:text-primary-dark">
                     Welcome to Todo App
                 </h1>
@@ -29,8 +49,9 @@ const Home = () => {
                     </Link>
                 </div>
             </div>
-            {/* Add Slider Below */}
-            <div className="w-full max-w-lg">
+
+            {/* Slider Component */}
+            <div className="w-full max-w-lg relative z-10">
                 <Slider />
             </div>
         </div>
