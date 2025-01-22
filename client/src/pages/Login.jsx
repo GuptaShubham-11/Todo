@@ -16,12 +16,10 @@ const Login = () => {
     const [message, setMessage] = useState(null);
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const handleChange = (e) => {
         SetFormData({ ...formData, [e.target.name]: e.target.value });
     }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -36,8 +34,6 @@ const Login = () => {
 
             const response = await authAPI.loginUser(data);
 
-            console.log(response);
-
             setLoading(false);
             setMessage({ message: response?.data?.data || response?.message, code: response?.data?.statusCode || response?.status });
 
@@ -49,9 +45,7 @@ const Login = () => {
                     accessToken: response.data.message.accessToken,
                     refreshToken: response.data.message.refreshToken,
                 }));
-                setTimeout(() => {
-                    navigate("/dashboard");
-                }, 2000);
+                localStorage.setItem("user", JSON.stringify(response.data.message.user));
             }
 
         } catch (err) {

@@ -10,7 +10,7 @@ const RecentActivities = () => {
         const fatchedActivities = async () => {
             setLoading(true);
             const response = await dashboardAPI.getRecentActivity();
-            setActivities(response?.data?.message);
+            setActivities(response?.data?.message || []);
             setLoading(false);
         };
         fatchedActivities();

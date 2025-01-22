@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 
 const Alert = ({ message, code, onClose }) => {
-    const type = code >= 400 ? "danger" : "success"; // Determine the alert type based on the code
+    const type = code < 400 ? "success" : "danger";
+    // Determine the alert type based on the code
+
     const bgColor = {
         success: "bg-green-100 text-green-800 border-green-500",
         danger: "bg-red-100 text-red-800 border-red-500",

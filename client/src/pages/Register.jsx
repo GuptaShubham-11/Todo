@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, InputField, Alert, Loader } from "../components";
 import { authAPI } from "../api/authAPI.js";
 import { Link, useNavigate } from "react-router-dom";
@@ -20,8 +20,10 @@ const Register = () => {
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        if (file && file.size > 2 * 1024 * 1024) { // 2MB limit
-            setMessage({ message: "File size should not exceed 2MB", code: 400 });
+        const allowedTypes = ["image/jpeg", "image/png"];
+
+        if (file && (!allowedTypes.includes(file.type) || file.size > 2 * 1024 * 1024)) {
+            setMessage({ message: "Invalid file. Only JPG/PNG allowed under 2MB.", code: 400 });
             return;
         }
         setFormData({ ...formData, [e.target.name]: file });
@@ -44,21 +46,22 @@ const Register = () => {
             if (formData.profilePic) data.append("profilePic", formData.profilePic);
 
             const response = await authAPI.registerUser(data);
-            setLoading(false);
+
             setMessage({
-                message: response?.data?.message || response?.data,
-                code: response?.status || response?.statusCode,
+                message: response?.data?.data || response?.message || "Registered successfully!",
+                code: response?.data?.statusCode || response?.status,
             });
 
-            if (response?.statusCode < 400) {
-                navigate("/login", { replace: true });
+            if (response?.data?.statusCode < 400) {
+                setTimeout(() => navigate("/login"), 2000);
             }
         } catch (err) {
-            setLoading(false);
             setMessage({
                 message: err.response?.data?.message || "Registration failed!",
                 code: err.response?.status || 500,
             });
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -97,7 +100,6 @@ const Register = () => {
                         name="profilePic"
                         onChange={handleFileChange}
                         accept="image/*"
-                        required
                     />
                     {loading ? (
                         <div className="flex justify-center mt-4">
@@ -117,7 +119,7 @@ const Register = () => {
             {message && (
                 <Alert
                     message={message.message}
-                    type={message.code < 400 ? "success" : "error"}
+                    code={message.code}
                     onClose={() => setMessage(null)}
                 />
             )}
