@@ -1,0 +1,27 @@
+{
+    "version": 2,
+    "name": "task-management-app",
+    "builds": [
+        {
+            "src": "client/package.json",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "dist"
+            }
+        },
+        {
+            "src": "server/**/*.js",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "/server/src/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/client/$1"
+        }
+    ]
+}
