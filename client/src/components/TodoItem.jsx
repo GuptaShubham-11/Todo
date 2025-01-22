@@ -40,6 +40,7 @@ const TodoItem = ({ todo, handleUpdateTodo, handleDeleteTodo, handleToggleTodo }
                         type="text"
                         value={newText}
                         onChange={(e) => setNewText(e.target.value)}
+                        disabled={todo.isCompleted}
                         className="flex-grow text-lg p-2 border rounded-lg outline-none dark:bg-gray-700 dark:text-white"
                     />
                 ) : (
