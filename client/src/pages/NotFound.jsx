@@ -13,10 +13,10 @@ const NotFound = () => {
                 Sorry, the page you're looking for doesn't exist. It may have been moved or deleted.
             </p>
             <Link
-                to="/dashboard"
+                to="/home"
                 className="px-6 py-2 bg-primary text-white rounded-lg shadow hover:bg-opacity-90 dark:bg-primary-dark"
             >
-                Back to dashboard
+                Back to Home
             </Link>
         </div>
     );
