@@ -16,9 +16,15 @@ const apiClient = axios.create({
 const registerUser = async (userData) => {
     try {
 
+        console.log("User data:", userData);
+
+
         const response = await apiClient.post("/register", userData, {
             headers: { "Content-Type": "multipart/form-data" },
         });
+
+        console.log("Response:", response);
+
 
         return handleResponse(response);
     } catch (error) {

@@ -4,12 +4,12 @@ import ApiResponse from "../utils/ApiResponse.js";
 import ApiError from "../utils/ApiError.js";
 import { uploadOnCloudinary, deleteOnCloudinary } from "../utils/cloudinary.js";
 import jwt from "jsonwebtoken";
+import { log } from "console";
 
 // Cookies for options
 const options = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production", // CHANGE: Ensure secure cookies in production only
-    sameSite: "strict", // CHANGE: Add SameSite policy for cookies
+    secure: true
 };
 
 // CHANGE: Log errors for debugging
@@ -90,6 +90,9 @@ const registerUser = asyncHandler(async (req, res) => {
 // CHANGE: Update loginUser function with status 200 and error handling
 const loginUser = asyncHandler(async (req, res) => {
     const { username, password } = req.body;
+
+    console.log("Login user:", username); // CHANGE: Log the username for debugging
+    console.log("Login password:", password); // CHANGE: Log the password for debugging
 
     if (!username || !password) {
         throw new ApiError(400, "Please fill all the fields");
