@@ -1,0 +1,36 @@
+{
+    "rewrites": [
+        {
+            "source": "/api/(.*)",
+            "destination": "https://todo-qvql.onrender.com/api/v1/$1"
+        }
+    ],
+    "redirects": [
+        {
+            "source": "/old-route",
+            "destination": "/new-route",
+            "permanent": true
+        }
+    ],
+    "headers": [
+        {
+            "source": "/api/(.*)",
+            "headers": [
+                {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "https://your-frontend-url.vercel.app"
+                },
+                {
+                    "key": "Access-Control-Allow-Credentials",
+                    "value": "true"
+                },
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
+                }
+            ]
+        }
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false
+}
