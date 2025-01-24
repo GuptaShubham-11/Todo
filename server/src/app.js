@@ -19,6 +19,13 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
+app.get("/server", (req, res) => {
+    return res.status(200).send("Server is running");
+});
+app.get("/", (req, res) => {
+    return res.status(200).send("Home page");
+});
+
 import userRoutes from "./routes/user.routes.js";
 app.use("/api/v1/users", userRoutes);
 
