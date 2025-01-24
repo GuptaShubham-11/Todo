@@ -18,7 +18,7 @@
             "headers": [
                 {
                     "key": "Access-Control-Allow-Origin",
-                    "value": "http://localhost:5173, https://todo-one-azure-75.vercel.app"
+                    "value": "http://localhost:5173, https://todo-five-neon.vercel.app"
                 },
                 {
                     "key": "Access-Control-Allow-Credentials",
