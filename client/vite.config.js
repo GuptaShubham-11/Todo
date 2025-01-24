@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: import.meta.env.VITE_SERVER_API_BASE_URL || 'http://localhost:3000',
+        target: process.env.VITE_SERVER_API_BASE_URL || 'http://localhost:3000',
         changeOrigin: true,
         secure: true,
       },
