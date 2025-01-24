@@ -6,7 +6,7 @@ const BASE_URL = import.meta.env.VITE_SERVER_API_BASE_URL || 'http://localhost:3
 
 // Create an Axios instance
 const apiClient = axios.create({
-    baseURL: `${BASE_URL}/api/v1/users`, // Base URL for user-related APIs
+    baseURL: `/api/v1/users`, // Base URL for user-related APIs
     headers: {
         "Content-Type": "application/json",
     },
@@ -16,14 +16,9 @@ const apiClient = axios.create({
 const registerUser = async (userData) => {
     try {
 
-        console.log("User data:", userData);
-
-
         const response = await apiClient.post("/register", userData, {
             headers: { "Content-Type": "multipart/form-data" },
         });
-
-        console.log("Response:", response);
 
 
         return handleResponse(response);
