@@ -20,8 +20,6 @@ const generateAccessAndRefreshTokens = async (userId) => {
             throw new ApiError(400, "User not found"); // CHANGE: Added better error handling if user is not found
         }
 
-        console.log("User found:", user); // CHANGE: Log user data for debugging
-
         // CHANGE: Ensure that these methods exist and generate tokens correctly
         const accessToken = user.genrateAccessToken(); // Should use the genrateAccessToken method in the User model
         const refreshToken = user.genrateRefreshToken(); // Should use the genrateRefreshToken method in the User model
@@ -90,9 +88,6 @@ const registerUser = asyncHandler(async (req, res) => {
 // CHANGE: Update loginUser function with status 200 and error handling
 const loginUser = asyncHandler(async (req, res) => {
     const { username, password } = req.body;
-
-    console.log("Login user:", username); // CHANGE: Log the username for debugging
-    console.log("Login password:", password); // CHANGE: Log the password for debugging
 
     if (!username || !password) {
         throw new ApiError(400, "Please fill all the fields");
