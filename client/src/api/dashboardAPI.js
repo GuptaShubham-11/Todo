@@ -2,10 +2,10 @@ import handleError from "./handleError.js";
 import handleResponse from "./handleResponse.js";
 import axios from "axios";
 
-const BASE_URL = import.meta.env.VITE_SERVER_API_BASE_URL || 'http://localhost:3000/api/v1';
+const BASE_URL = import.meta.env.VITE_SERVER_API_BASE_URL || 'http://localhost:3000';
 
 const apiClient = axios.create({
-    baseURL: `${BASE_URL}/dashboard`, // Base URL for dashboard-related APIs
+    baseURL: `${BASE_URL}/api/v1/dashboard`, // Base URL for dashboard-related APIs
     headers: {
         "Content-Type": "application/json",
     }

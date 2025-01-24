@@ -1,0 +1,2 @@
+VITE_SERVER_API_BASE_URL = Backend_Server_Url
+NODE_ENV = production

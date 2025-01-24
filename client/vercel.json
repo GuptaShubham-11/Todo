@@ -2,7 +2,7 @@
     "rewrites": [
         {
             "source": "/api/(.*)",
-            "destination": "https://todo-qvql.onrender.com/api/v1/$1"
+            "destination": "https://todo-wkhs.onrender.com/$1"
         }
     ],
     "redirects": [
