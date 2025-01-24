@@ -9,7 +9,6 @@ dotenv.config({
 connectDB()
     .then(() => {
         app.on("error", (error) => {
-            console.log("ERROR IN CONNECTDB !!", error);
             throw error;
         });
         app.listen(process.env.PORT || 3000, () => {
@@ -17,6 +16,5 @@ connectDB()
         });
     })
     .catch((error) => {
-        console.log("ERROR IN CONNECTDB FROM INDEXJS !!", error);
         process.exit(1);
     });

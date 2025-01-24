@@ -52,7 +52,6 @@ const deleteTodo = async (id) => {
 const updateTodo = async (id, todoData) => {
     try {
         const response = await apiClient.put(`/update-todo/${id}`, todoData);
-        console.log("Response update todo |||", response);
 
         return handleResponse(response);
     } catch (error) {
