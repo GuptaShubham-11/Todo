@@ -18,7 +18,7 @@
             "headers": [
                 {
                     "key": "Access-Control-Allow-Origin",
-                    "value": "https://your-frontend-url.vercel.app"
+                    "value": "http://localhost:5173, https://todo-one-azure-75.vercel.app"
                 },
                 {
                     "key": "Access-Control-Allow-Credentials",
