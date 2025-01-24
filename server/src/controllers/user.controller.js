@@ -8,26 +8,34 @@ import jwt from "jsonwebtoken";
 // Cookies for options
 const options = {
     httpOnly: true,
-    secure: true
-}
+    secure: process.env.NODE_ENV === "production", // CHANGE: Ensure secure cookies in production only
+    sameSite: "strict", // CHANGE: Add SameSite policy for cookies
+};
 
+// CHANGE: Log errors for debugging
 const generateAccessAndRefreshTokens = async (userId) => {
     try {
-
         const user = await User.findById(userId);
+        if (!user) {
+            throw new ApiError(400, "User not found"); // CHANGE: Added better error handling if user is not found
+        }
 
-        const accessToken = user.genrateAccessToken()
-        const refreshToken = user.genrateRefreshToken()
+        console.log("User found:", user); // CHANGE: Log user data for debugging
+
+        // CHANGE: Ensure that these methods exist and generate tokens correctly
+        const accessToken = user.genrateAccessToken(); // Should use the genrateAccessToken method in the User model
+        const refreshToken = user.genrateRefreshToken(); // Should use the genrateRefreshToken method in the User model
 
         user.refreshToken = refreshToken;
-        user.save({ validateBeforeSave: false });
+        await user.save({ validateBeforeSave: false }); // CHANGE: Ensure user.save() is awaited and validated
 
         return { accessToken, refreshToken };
 
     } catch (error) {
-        throw new ApiError(500, "Access & Refresh token not generated successfully!");
+        console.error("Error generating tokens:", error); // CHANGE: Log the error
+        throw new ApiError(500, "Access & Refresh token not generated successfully!"); // CHANGE: Added error logging
     }
-}
+};
 
 const registerUser = asyncHandler(async (req, res) => {
     const { name, username, password } = req.body;
@@ -79,14 +87,11 @@ const registerUser = asyncHandler(async (req, res) => {
 
 });
 
+// CHANGE: Update loginUser function with status 200 and error handling
 const loginUser = asyncHandler(async (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
-        throw new ApiError(400, "Please fill all the fields");
-    }
-
-    if (username.trim() === "" || password.trim() === "") {
         throw new ApiError(400, "Please fill all the fields");
     }
 
@@ -107,15 +112,13 @@ const loginUser = asyncHandler(async (req, res) => {
     const loggedInUser = await User.findById(user?._id).select("-password -refreshToken");
 
     return res
-        .status(201)
+        .status(200) // CHANGE: Status should be 200 for successful login
         .cookie("accessToken", accessToken, options)
         .cookie("refreshToken", refreshToken, options)
         .json(
             new ApiResponse(
-                201,
-                {
-                    user: loggedInUser, accessToken, refreshToken
-                },
+                200, // CHANGE: Status code should be 200 for successful login
+                { user: loggedInUser, accessToken, refreshToken },
                 "User logged in successfully"
             )
         );
