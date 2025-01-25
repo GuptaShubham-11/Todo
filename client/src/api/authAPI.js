@@ -2,8 +2,6 @@ import axios from "axios";
 import handleError from "./handleError.js";
 import handleResponse from "./handleResponse.js";
 
-const BASE_URL = import.meta.env.VITE_SERVER_API_BASE_URL || 'http://localhost:3000';
-
 // Create an Axios instance
 const apiClient = axios.create({
     baseURL: `/api/v1/users`, // Base URL for user-related APIs
