@@ -14,7 +14,7 @@ const Footer = () => {
 
                 {/* Copyright Text */}
                 <p className="text-sm sm:text-base mt-2 sm:mt-0">
-                    © 2025 Todo Created By Shubham 💖
+                    © Todo made By ❤️ Gupta Shubham
                 </p>
 
                 {/* Discord Link */}

@@ -8,5 +8,8 @@ export default defineConfig({
   //     '/api': 'https://localhost:3000', use when you are in development mode
   //   },
   // },
+  server: {
+    historyApiFallback: true
+  },
   plugins: [react()],
 });
