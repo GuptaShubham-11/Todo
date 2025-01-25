@@ -4,7 +4,7 @@ import handleResponse from "./handleResponse.js";
 
 // Create an Axios instance
 const apiClient = axios.create({
-    baseURL: `${import.meta.env.VITE_SERVER_API_URL}/users`, // Base URL for user-related APIs
+    baseURL: `/api/v1/users`, // Base URL for user-related APIs
     headers: {
         "Content-Type": "application/json",
     },
