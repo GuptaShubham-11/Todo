@@ -6,7 +6,7 @@ export default defineConfig({
   base: './',
   server: {
     proxy: {
-      '/api': process.env.VITE_SERVER_API_URL || 'http://localhost:3000',
+      '/api': process.env.VITE_SERVER_API_URL || 'https://todo-nf4y.onrender.com',
     },
   },
   plugins: [react()],
