@@ -5,7 +5,7 @@ import axios from "axios";
 
 
 const apiClient = axios.create({
-    baseURL: `/api/v1/todos`, // Base URL for todo-related APIs
+    baseURL: `${import.meta.env.VITE_SERVER_API_URL}/api/v1/todos`, // Base URL for todo-related APIs
     headers: {
         "Content-Type": "application/json",
     }
