@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 const apiClient = axios.create({
-    baseURL: `/api/v1/dashboard`, // Base URL for dashboard-related APIs
+    baseURL: `${import.meta.env.VITE_SERVER_API_URL}/dashboard`, // Base URL for dashboard-related APIs
     headers: {
         "Content-Type": "application/json",
     }
