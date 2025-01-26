@@ -30,10 +30,10 @@ This project is a task management application built with React for the frontend 
 - **Mongoose**: For interacting with MongoDB.
 
 ### Important Packeges
- -**Jwt**
- -**Bcrypt**
- -**Multer**
- -**Cors**
+ -  **Jwt**
+ - **Bcrypt**
+ - **Multer**
+ - **Cors**
 
 ## Installation
 
