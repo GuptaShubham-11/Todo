@@ -4,14 +4,44 @@
 
 This project is a task management application built with React for the frontend and Node.js with MongoDB for the backend. The application allows users to manage their todos, track progress, and view recent activities.
 
+![Home](./ScreenshortOfTodoApp/Home.jpeg)
+
+![Login](./ScreenshortOfTodoApp/Login.jpeg)
+
+![Register](./ScreenshortOfTodoApp/Register.jpeg)
+
+
 ## Features
 
 - **Add, Edit, Delete Todos**: Users can add new todos, edit existing ones, and delete them.
+
 - **Toggle Completion**: Mark todos as completed or uncompleted.
+
+![Todo](./ScreenshortOfTodoApp/TodoDark.jpeg)
+
+![Todo](./ScreenshortOfTodoApp/TodoLight.jpeg)
+
 - **Focus Mode**: Filter and display only uncompleted todos to help users concentrate on pending tasks.
+
+![Timer](./ScreenshortOfTodoApp/FocusMode.jpeg)
+
 - **Timer**: Each todo has a timer that shows the elapsed time since its creation and pauses when the todo is completed.
+
+![Timer](./ScreenshortOfTodoApp/FocusPage.jpeg)
+
+
 - **Dashboard**: Displays todo profile information and task progress, including the number of completed and total tasks.
+
 - **Recent Activities**: View recent activities categorized into completed and uncompleted todos.
+
+![Dashboard](./ScreenshortOfTodoApp/DashboardDark.jpeg)
+
+![Dashboard](./ScreenshortOfTodoApp/DashboardLight.jpeg)
+
+- **Sidebar**: Provides navigation.
+
+![Sidebar](./ScreenshortOfTodoApp/Sidebar.jpeg)
+
 
 ## Technologies Used
 
