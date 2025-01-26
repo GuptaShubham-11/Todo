@@ -56,7 +56,10 @@ const getCurrentUser = async () => {
 
 const updateUserDetails = async (userData) => {
     try {
-        const response = await apiClient.put("/update-user-details", userData);
+        const token = localStorage.getItem("accessToken");
+        const response = await apiClient.put("/update-user-details", userData, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
         return handleResponse(response);
     } catch (error) {
         return handleError(error);
@@ -65,8 +68,12 @@ const updateUserDetails = async (userData) => {
 
 const updateUserProfilePic = async (formData) => {
     try {
+        const token = localStorage.getItem("accessToken");
         const response = await apiClient.put("/update-user-profile-pic", formData, {
-            headers: { "Content-Type": "multipart/form-data" },
+            headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${token}`
+            },
         });
         return handleResponse(response);
     } catch (error) {
@@ -76,7 +83,10 @@ const updateUserProfilePic = async (formData) => {
 
 const changeCurrentPassword = async (userData) => {
     try {
-        const response = await apiClient.put("/change-current-password", userData);
+        const token = localStorage.getItem("accessToken");
+        const response = await apiClient.put("/change-current-password", userData, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
         return handleResponse(response);
     } catch (error) {
         return handleError(error);
@@ -85,7 +95,10 @@ const changeCurrentPassword = async (userData) => {
 
 const deleteCurrentUser = async () => {
     try {
-        const response = await apiClient.delete("/delete-user");
+        const token = localStorage.getItem("accessToken");
+        const response = await apiClient.delete("/delete-user", {
+            headers: { Authorization: `Bearer ${token}` },
+        });
         return handleResponse(response);
     } catch (error) {
         return handleError(error);
@@ -94,7 +107,10 @@ const deleteCurrentUser = async () => {
 
 const refreshAccessToken = async () => {
     try {
-        const response = await apiClient.get("/refresh-token");
+        const token = localStorage.getItem("refreshToken");
+        const response = await apiClient.get("/refresh-token", {
+            headers: { Authorization: `Bearer ${token}` },
+        });
         return handleResponse(response);
     } catch (error) {
         return handleError(error);

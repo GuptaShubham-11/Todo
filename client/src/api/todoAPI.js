@@ -11,6 +11,17 @@ const apiClient = axios.create({
     }
 });
 
+// Set Authorization header globally using an interceptor
+apiClient.interceptors.request.use((config) => {
+    const token = localStorage.getItem("accessToken"); // Get the token from localStorage
+    if (token) {
+        config.headers["Authorization"] = `Bearer ${token}`; // Attach the token to every request
+    }
+    return config;
+}, (error) => {
+    return Promise.reject(error);
+});
+
 const createTodo = async (todoData) => {
     try {
         const response = await apiClient.post("/create-todo", todoData);
