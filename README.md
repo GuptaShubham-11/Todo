@@ -10,7 +10,7 @@ This project is a task management application built with React for the frontend 
 - **Toggle Completion**: Mark todos as completed or uncompleted.
 - **Focus Mode**: Filter and display only uncompleted todos to help users concentrate on pending tasks.
 - **Timer**: Each todo has a timer that shows the elapsed time since its creation and pauses when the todo is completed.
-- **Dashboard**: Displays user profile information and task progress, including the number of completed and total tasks.
+- **Dashboard**: Displays todo profile information and task progress, including the number of completed and total tasks.
 - **Recent Activities**: View recent activities categorized into completed and uncompleted todos.
 
 ## Technologies Used
@@ -29,6 +29,12 @@ This project is a task management application built with React for the frontend 
 - **MongoDB**: For storing todo data.
 - **Mongoose**: For interacting with MongoDB.
 
+### Important Packeges
+ -**Jwt**
+ -**Bcrypt**
+ -**Multer**
+ -**Cors**
+
 ## Installation
 
 ### Prerequisites
@@ -42,7 +48,7 @@ This project is a task management application built with React for the frontend 
 
 ```bash
 git clone https://github.com/your-username/task-management-app.git
-cd task-management-app
+cd todo
 
 GitHub Copilot
 Sure, here's the complete README.md file with the full content:
@@ -95,7 +101,10 @@ Dashboard.jsx: Displays an overview of the user's profile and task progress.
 Timer.jsx: A reusable component that shows the elapsed time since the todo was created and pauses when the todo is completed.
 
 ### Backend
-dashboard.controller.js: Handles requests related to the dashboard functionalities, such as fetching the count of completed todos, total todos, and recent activities.
+
+#### user.controller.js: Handles requests related to the user functionalities, such as a register, login, logout & update deatils.
+#### todo.controller.js: Handles requests related to the todo functionalities, such as a add, remove, update & delete todo.
+#### dashboard.controller.js: Handles requests related to the dashboard functionalities, such as fetching the count of completed todos, total todos, and recent activities.
 
 ## Usage
 ### Adding a Todo
@@ -111,7 +120,7 @@ The dashboard shows the number of completed and total tasks, providing an overvi
 Contributing
 
 ### Contributing
-Contributions are welcome! Please follow these steps:
+**Contributions are welcome! Please follow these steps:**
 
 #### Fork the repository.
 Create a new branch (git checkout -b feature-branch).
