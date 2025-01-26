@@ -71,7 +71,7 @@ export default function Sidebar() {
         {
             icon: <AiOutlineQuestionCircle />,
             label: "Help (Discord)",
-            path: "https://discord.gg/d2dPhDHN",
+            path: "https://discord.gg/jCPHGSAnBe",
         },
     ];
 

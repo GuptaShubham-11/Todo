@@ -113,7 +113,7 @@ const ProfileCard = ({ user, loading, handleLogout }) => {
 
             {/* Logout Button */}
             <button
-                className="w-full py-2 bg-red-500 dark:bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 transition duration-300"
+                className="w-full py-2 bg-red-500 dark:bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:dark:ring-blue-300 transition duration-300"
                 onClick={handleLogout}
                 disabled={loading}
             >

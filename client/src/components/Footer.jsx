@@ -19,7 +19,7 @@ const Footer = () => {
 
                 {/* Discord Link */}
                 <a
-                    href="https://discord.gg/d2dPhDHN"
+                    href="https://discord.gg/jCPHGSAnBe"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white rounded transition duration-300 ease-in-out transform hover:scale-105"
