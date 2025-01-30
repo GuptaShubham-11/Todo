@@ -9,7 +9,6 @@ const Header = () => {
     const { width, height } = useWindowSize();
     const [showConfetti, setShowConfetti] = useState(false);
 
-    // Load star status from localStorage
     useEffect(() => {
         const savedStatus = localStorage.getItem("stared") === "true";
         setIsStarred(savedStatus);
@@ -22,7 +21,7 @@ const Header = () => {
 
         if (newStatus) {
             setShowConfetti(true);
-            setTimeout(() => setShowConfetti(false), 3000); // Stop confetti after 3s
+            setTimeout(() => setShowConfetti(false), 5000); 
         }
     };
 
