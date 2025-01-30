@@ -1,21 +1,23 @@
 import { ThemeToggle } from './index.js';
 import NewTodoLogo from '../assets/NewTodoLogo.png';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Header = () => {
-
     const [star, setStar] = useState(0);
 
-    const fetchStar = () => {
-        const stared = localStorage.getItem("stared") || "false";
-        if (stared === "true") {
-            setStar(star - 1);
-            localStorage.setItem("stared", "false");
-        } else {
-            setStar(star + 1);
-            localStorage.setItem("stared", "true");
-        }
-    }
+    // Initialize star count from localStorage
+    useEffect(() => {
+        const stared = localStorage.getItem("stared") === "true";
+        setStar(stared ? 1 : 0);
+    }, []);
+
+    const toggleStar = () => {
+        setStar(prev => {
+            const newStar = prev === 0 ? 1 : 0;
+            localStorage.setItem("stared", newStar === 1 ? "true" : "false");
+            return newStar;
+        });
+    };
 
     return (
         <header className="p-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md flex justify-between items-center flex-wrap">
@@ -24,7 +26,7 @@ const Header = () => {
                 {/* Theme Toggle */}
                 <ThemeToggle />
                 <button
-                    onClick={() => (fetchStar())}
+                    onClick={toggleStar}
                     className="p-2 px-4 rounded outline-none cursor-pointer border border-gray-300 dark:border-gray-700 font-bold"
                 >
                     {star} 🌟
